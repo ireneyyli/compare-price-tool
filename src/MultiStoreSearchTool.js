@@ -415,7 +415,7 @@ const MultiStoreSearchTool = () => {
         </div>
 
         {/* Instructions */}
-        <div style={styles.instructionCard}>
+        {/* <div style={styles.instructionCard}>
           <h3 style={styles.instructionTitle}>
             <ShoppingCart size={20} />
             How it works:
@@ -426,10 +426,10 @@ const MultiStoreSearchTool = () => {
             <p style={{margin: '5px 0'}}>3. Click "Search All" to open tabs for each selected store</p>
             <p style={{margin: '5px 0'}}>4. Compare prices across all open tabs manually</p>
           </div>
-        </div>
+        </div> */}
 
         {/* Quick Search Examples */}
-        <div style={styles.exampleCard}>
+        {/* <div style={styles.exampleCard}>
           <h3 style={styles.exampleTitle}>Quick Search Examples:</h3>
           <div style={styles.exampleGrid}>
             {[
@@ -453,7 +453,7 @@ const MultiStoreSearchTool = () => {
               </button>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Footer */}
         <div style={styles.footer}>
