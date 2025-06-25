@@ -91,18 +91,17 @@ const MultiStoreSearchTool = () => {
   };
 
   const openSearches = () => {
-    if (!searchTerm.trim()) {
-      alert('Please enter a search term');
-      return;
-    }
-
     const storesToSearch = selectedStores.length > 0 ? selectedStores : stores.map(s => s.name);
-    
+
     storesToSearch.forEach(storeName => {
       const store = stores.find(s => s.name === storeName);
       if (store) {
-        const searchUrl = store.url + encodeURIComponent(searchTerm);
-        window.open(searchUrl, '_blank');
+        // 👇 儘早打開空的 tab，不然會被擋
+        const newTab = window.open('about:blank', '_blank');
+        if (newTab) {
+          const searchUrl = store.url + encodeURIComponent(searchTerm);
+          newTab.location.href = searchUrl;
+        }
       }
     });
   };
