@@ -42,12 +42,12 @@ const MultiStoreSearchTool = () => {
       logo: '🥚',
       color: '#e97600'
     },
-    {
-      name: 'Home Depot',
-      url: 'https://www.homedepot.com/s/',
-      logo: '🏠',
-      color: '#f96302'
-    },
+    // {
+    //   name: 'Home Depot',
+    //   url: 'https://www.homedepot.com/s/',
+    //   logo: '🏠',
+    //   color: '#f96302'
+    // },
     {
       name: 'Etsy',
       url: 'https://www.etsy.com/search?q=',
