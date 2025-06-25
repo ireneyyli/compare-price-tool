@@ -65,6 +65,12 @@ const MultiStoreSearchTool = () => {
       url: 'https://www.bhphotovideo.com/c/search?Ntt=',
       logo: '📷',
       color: '#333333'
+    },
+    {
+      name: 'JB Hi-Fi',
+      url: 'https://www.jbhifi.com.au/search?query=',
+      logo: '🎵',
+      color: '#e60012'
     }
   ];
 
