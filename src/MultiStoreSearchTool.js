@@ -388,17 +388,9 @@ const MultiStoreSearchTool = () => {
                   >
                     Select All
                   </button>
+                  <span style={{color: '#d1d5db'}}>|</span>
                 </>
               )}
-              {/* <button
-                onClick={selectAllStores}
-                style={styles.controlButton}
-                onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
-                onMouseLeave={(e) => e.target.style.textDecoration = 'none'}
-              >
-                Select All
-              </button> */}
-              <span style={{color: '#d1d5db'}}>|</span>
               <button
                 onClick={clearAllStores}
                 style={{...styles.controlButton, color: '#6b7280'}}
