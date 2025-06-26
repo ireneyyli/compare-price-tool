@@ -450,8 +450,8 @@ const MultiStoreSearchTool = () => {
           </h3>
           <div style={styles.instructionList}>
             <p style={{margin: '5px 0'}}>1. Enter your search term in the box above</p>
-            <p style={{margin: '5px 0'}}>2. Select which stores you want to search (or leave blank for all)</p>
-            <p style={{margin: '5px 0'}}>3. Click "Search All" to open tabs for each selected store</p>
+            <p style={{margin: '5px 0'}}>2. Select which stores you want to search</p>
+            <p style={{margin: '5px 0'}}>3. Click "Search" to open tabs for each selected store</p>
             <p style={{margin: '5px 0'}}>4. Compare prices across all open tabs manually</p>
             <p style={{
               marginTop: '15px',
