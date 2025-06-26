@@ -4,6 +4,19 @@ import { Search, ExternalLink, ShoppingCart, Store } from 'lucide-react';
 const MultiStoreSearchTool = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStores, setSelectedStores] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if device is mobile
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const stores = [
     {
@@ -75,11 +88,17 @@ const MultiStoreSearchTool = () => {
   ];
 
   const handleStoreToggle = (storeName) => {
-    setSelectedStores(prev => 
-      prev.includes(storeName) 
-        ? prev.filter(s => s !== storeName)
-        : [...prev, storeName]
-    );
+    if (isMobile) {
+      // On mobile, only allow single selection
+      setSelectedStores([storeName]);
+    } else {
+      // On desktop, allow multiple selection
+      setSelectedStores(prev => 
+        prev.includes(storeName) 
+          ? prev.filter(s => s !== storeName)
+          : [...prev, storeName]
+      );
+    }
   };
 
   const selectAllStores = () => {
@@ -91,17 +110,23 @@ const MultiStoreSearchTool = () => {
   };
 
   const openSearches = () => {
-    const storesToSearch = selectedStores.length > 0 ? selectedStores : stores.map(s => s.name);
+    if (!searchTerm.trim()) {
+      alert('Please enter a search term');
+      return;
+    }
 
+    if (selectedStores.length === 0) {
+      alert('Please select at least one store');
+      return;
+    }
+
+    const storesToSearch = selectedStores;
+    
     storesToSearch.forEach(storeName => {
       const store = stores.find(s => s.name === storeName);
       if (store) {
-        // 👇 儘早打開空的 tab，不然會被擋
-        const newTab = window.open('about:blank', '_blank');
-        if (newTab) {
-          const searchUrl = store.url + encodeURIComponent(searchTerm);
-          newTab.location.href = searchUrl;
-        }
+        const searchUrl = store.url + encodeURIComponent(searchTerm);
+        window.open(searchUrl, '_blank');
       }
     });
   };
@@ -329,7 +354,26 @@ const MultiStoreSearchTool = () => {
                 onKeyPress={(e) => e.key === 'Enter' && openSearches()}
               />
             </div>
-            <button
+            {!isMobile && (
+              <>
+                <button
+                  onClick={openSearches}
+                  style={styles.searchButton}
+                  onMouseEnter={(e) => {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 8px 25px rgba(102, 126, 234, 0.6)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = '0 4px 15px rgba(102, 126, 234, 0.4)';
+                  }}
+                >
+                  <ExternalLink size={20} />
+                  Select All
+                </button>
+              </>
+            )}
+            {/* <button
               onClick={openSearches}
               style={styles.searchButton}
               onMouseEnter={(e) => {
@@ -343,7 +387,7 @@ const MultiStoreSearchTool = () => {
             >
               <ExternalLink size={20} />
               Search All
-            </button>
+            </button> */}
           </div>
 
           {/* Store Selection Controls */}
@@ -408,13 +452,13 @@ const MultiStoreSearchTool = () => {
 
           {selectedStores.length === 0 && (
             <p style={styles.noSelectionNote}>
-              💡 No stores selected - will search all stores by default
+              💡 {isMobile ? 'Select one store to search' : 'Select stores to search (or use Select All)'}
             </p>
           )}
         </div>
 
         {/* Instructions */}
-        {/* <div style={styles.instructionCard}>
+        <div style={styles.instructionCard}>
           <h3 style={styles.instructionTitle}>
             <ShoppingCart size={20} />
             How it works:
@@ -424,8 +468,18 @@ const MultiStoreSearchTool = () => {
             <p style={{margin: '5px 0'}}>2. Select which stores you want to search (or leave blank for all)</p>
             <p style={{margin: '5px 0'}}>3. Click "Search All" to open tabs for each selected store</p>
             <p style={{margin: '5px 0'}}>4. Compare prices across all open tabs manually</p>
+            <p style={{
+              marginTop: '15px',
+              fontSize: '12px',
+              fontStyle: 'italic',
+              color: '#6b7280',
+              borderTop: '1px solid #d1d5db',
+              paddingTop: '10px'
+            }}>
+              P.S. Ensure that your browser's pop-up blocker is disabled for this site to allow search results to open in new tabs
+            </p>
           </div>
-        </div> */}
+        </div>
 
         {/* Quick Search Examples */}
         {/* <div style={styles.exampleCard}>
