@@ -174,7 +174,7 @@ const MultiStoreSearchTool = () => {
       position: 'relative'
     },
     searchInput: {
-      width: '100%',
+      width: '93%',
       padding: '15px 15px 15px 45px',
       border: '2px solid #e2e8f0',
       borderRadius: '12px',
@@ -354,26 +354,7 @@ const MultiStoreSearchTool = () => {
                 onKeyPress={(e) => e.key === 'Enter' && openSearches()}
               />
             </div>
-            {!isMobile && (
-              <>
-                <button
-                  onClick={openSearches}
-                  style={styles.searchButton}
-                  onMouseEnter={(e) => {
-                    e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxShadow = '0 8px 25px rgba(102, 126, 234, 0.6)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.transform = 'translateY(0)';
-                    e.target.style.boxShadow = '0 4px 15px rgba(102, 126, 234, 0.4)';
-                  }}
-                >
-                  <ExternalLink size={20} />
-                  Select All
-                </button>
-              </>
-            )}
-            {/* <button
+            <button
               onClick={openSearches}
               style={styles.searchButton}
               onMouseEnter={(e) => {
@@ -386,8 +367,8 @@ const MultiStoreSearchTool = () => {
               }}
             >
               <ExternalLink size={20} />
-              Search All
-            </button> */}
+              Search
+            </button>
           </div>
 
           {/* Store Selection Controls */}
@@ -397,14 +378,26 @@ const MultiStoreSearchTool = () => {
               Select Stores ({selectedStores.length} selected)
             </h3>
             <div style={styles.controls}>
-              <button
+              {!isMobile && (
+                <>
+                  <button
+                    onClick={selectAllStores}
+                    style={styles.controlButton}
+                    onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
+                    onMouseLeave={(e) => e.target.style.textDecoration = 'none'}
+                  >
+                    Select All
+                  </button>
+                </>
+              )}
+              {/* <button
                 onClick={selectAllStores}
                 style={styles.controlButton}
                 onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
                 onMouseLeave={(e) => e.target.style.textDecoration = 'none'}
               >
                 Select All
-              </button>
+              </button> */}
               <span style={{color: '#d1d5db'}}>|</span>
               <button
                 onClick={clearAllStores}
